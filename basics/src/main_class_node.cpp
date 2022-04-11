@@ -16,23 +16,42 @@
 #include <chrono>
 
 #include "rclcpp/rclcpp.hpp"
-#include "basics/ClassNode.hpp"
+#include "basics/ClassPub.hpp"
 
 using namespace std::chrono_literals;
 
 int main(int argc, char * argv[])
 {
+  // INIT --> del programa (con las precondiciones o parámetros)
   rclcpp::init(argc, argv);
 
-  auto node_a = std::make_shared<basics::MyCustomNode>("nodo_A", 1s);
-  auto node_b = std::make_shared<basics::MyCustomNode>("nodo_B", 500ms);
+  // DECLARACIÓN DE NODOS
+  /*
+  *  auto pone el tipo automáticamente al igualarlo a algo
+  *  Espacio de nombres :: Clase :: Método (en este caso static)
+  *  Puntero inteligente (puntero que libera la memoria automáticamente cuando no se usa)
+  *
+  *  std::shared_ptr<rclcpp::Node> node_a (new rclcpp::Node("my_node"));
+  *  std::shared_ptr<rclcpp::Node> node_a = std::make_shared<rclcpp::Node>("my_node");
+  *  rclcpp::Node::SharedPtr node_a = std::make_shared<rclcpp::Node>("my_node");
+  *  auto node_a = std::make_shared<rclcpp::Node>("my_node");
+  */
+
+  auto node_a = std::make_shared<basics::MyCustomPub>("nodo_A", 1s);
+  auto node_b = std::make_shared<basics::MyCustomPub>("nodo_B", 500ms);
+
+  // EXECUTORS
+  // Objetos encargados de ejecutar nodos (single/multi thread)
+
   rclcpp::executors::MultiThreadedExecutor executor;
 
+  // Se añaden los nodos para hacerles spin.
   // Para lifecycle nodes:
   //      executor.add_node(node_a->get_node_base_interface());
   executor.add_node(node_a);
   executor.add_node(node_b);
 
+  // Se queda bloqueado esperando los eventos.
   executor.spin();
 
   rclcpp::shutdown();

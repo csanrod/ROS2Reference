@@ -12,14 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef BASICS__CLASSNODE_HPP_
-#define BASICS__CLASSNODE_HPP_
+#ifndef BASICS__CLASSPUB_HPP_
+#define BASICS__CLASSPUB_HPP_
 
 #include <string>
 #include <chrono>
 
 // Mensajes de ROS2 para publicar/subscribirse en los topics
 #include "rclcpp/rclcpp.hpp"
+// Minúscula y con barra baja, LaserScan => laser_scan
 #include "std_msgs/msg/string.hpp"
 
 using std::placeholders::_1;
@@ -27,11 +28,11 @@ using std::placeholders::_1;
 namespace basics
 {
 
-class MyCustomNode : public rclcpp::Node
+class MyCustomPub : public rclcpp::Node
 {
 public:
-  // Constructor (nombre_del_nodo, rate)
-  MyCustomNode(const std::string & name, const std::chrono::nanoseconds & rate);
+  // Constructor (nombre_del_nodo, rate_del_timer)
+  MyCustomPub(const std::string & name, const std::chrono::nanoseconds & rate);
 
 private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_;
@@ -43,4 +44,4 @@ private:
 
 }  // namespace basics
 
-#endif  // BASICS__CLASSNODE_HPP_
+#endif  // BASICS__CLASSPUB_HPP_

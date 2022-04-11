@@ -21,7 +21,7 @@ include_directories(include)
 
 # Agregamos los modulos
 add_library(${PROJECT_NAME} SHARED
-    src/basics/ClassNode.cpp
+    src/basics/ClassPub.cpp
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
