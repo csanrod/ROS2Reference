@@ -18,8 +18,6 @@
 namespace basics
 {
 
-using std::placeholders::_1;
-
 MyCustomPub::MyCustomPub(const std::string & name, const std::chrono::nanoseconds & rate)
 : Node(name)
 {

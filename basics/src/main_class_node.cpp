@@ -17,6 +17,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "basics/ClassPub.hpp"
+#include "basics/ClassSub.hpp"
 
 using namespace std::chrono_literals;
 
@@ -40,6 +41,8 @@ int main(int argc, char * argv[])
   auto node_a = std::make_shared<basics::MyCustomPub>("nodo_A", 1s);
   auto node_b = std::make_shared<basics::MyCustomPub>("nodo_B", 500ms);
 
+  auto node_c = std::make_shared<basics::MyCustomSub>("nodo_C");
+
   // EXECUTORS
   // Objetos encargados de ejecutar nodos (single/multi thread)
 
@@ -50,6 +53,7 @@ int main(int argc, char * argv[])
   //      executor.add_node(node_a->get_node_base_interface());
   executor.add_node(node_a);
   executor.add_node(node_b);
+  executor.add_node(node_c);
 
   // Se queda bloqueado esperando los eventos.
   executor.spin();
