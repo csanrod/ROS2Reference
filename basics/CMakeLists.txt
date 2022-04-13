@@ -32,8 +32,8 @@ add_executable(main_class_node src/main_class_node.cpp)
 target_link_libraries(main_class_node ${PROJECT_NAME})
 
 # Se deben instalar los directorios
-install(DIRECTORY include/
-    DESTINATION include/
+install(DIRECTORY include launch
+    DESTINATION share/${PROJECT_NAME}
 )
 
 # Instalación de cada paquete
